@@ -19,9 +19,9 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3️⃣ Build APK usando Gradle preinstallato
+      # 3️⃣ Build APK usando Gradle preinstallato con opzioni di debug
       - name: Build APK
-        run: gradle -p app assembleDebug
+        run: gradle -p app assembleDebug --stacktrace --info  # Aggiungi le opzioni di debug
 
       # 4️⃣ Carica l'APK come artifact
       - name: Upload APK
@@ -29,4 +29,3 @@ jobs:
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
-
