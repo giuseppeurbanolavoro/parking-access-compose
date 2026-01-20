@@ -9,22 +9,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1️⃣ Scarica il codice
       - uses: actions/checkout@v4
 
+      # 2️⃣ Imposta Java 17
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Grant execute permission
-        run: chmod +x gradlew || true
-
+      # 3️⃣ Build APK usando Gradle preinstallato
       - name: Build APK
-        run: ./gradlew assembleDebug
+        run: gradle -p app assembleDebug
 
+      # 4️⃣ Carica l'APK come artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
